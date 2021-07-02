@@ -27,6 +27,8 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-ui:1.2.32")
 
     runtimeOnly("org.postgresql:postgresql")
+
+    implementation("org.flywaydb:flyway-core")
 }
 
 tasks.withType<KotlinCompile> {
