@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/RestaurantListing-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=8080 -jar build/libs/RestaurantListing-0.0.1-SNAPSHOT.jar
