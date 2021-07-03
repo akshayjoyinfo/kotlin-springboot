@@ -1,5 +1,6 @@
 package com.wolt.restaurantlisting.controllers
 
+import com.wolt.restaurantlisting.dto.RestaurantDto
 import com.wolt.restaurantlisting.dto.response.RestaurantList
 import com.wolt.restaurantlisting.service.RestaurantService
 import io.swagger.v3.oas.annotations.Operation
@@ -27,6 +28,19 @@ class RestaurantController(
 
         return ResponseEntity<Boolean>(
             true,HttpStatus.OK
+        )
+    }
+
+    @GetMapping
+    @Operation(description = "Get All Restaurants in the Wolt", tags = ["Restaurants"],
+        summary = "Get All Restaurants")
+    fun getAllRestaurants(): ResponseEntity<RestaurantList>{
+        val restaurants = restaurantService.getAllRestaurants()
+
+        return ResponseEntity<RestaurantList>(
+            RestaurantList(
+                restaurants
+            ), HttpStatus.OK
         )
     }
 }

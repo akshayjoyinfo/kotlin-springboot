@@ -1,6 +1,7 @@
 package com.wolt.restaurantlisting.service.impl
 
 import com.wolt.restaurantlisting.domain.entities.Restaurant
+import com.wolt.restaurantlisting.dto.RestaurantDto
 import com.wolt.restaurantlisting.dto.response.RestaurantList
 import com.wolt.restaurantlisting.repository.RestaurantRepository
 import com.wolt.restaurantlisting.service.RestaurantService
@@ -24,5 +25,13 @@ class RestaurantServiceImpl(
             return false
         }
         return true
+    }
+
+    override fun getAllRestaurants(): List<RestaurantDto> {
+        var restaurantEntities =  restaurantRepository.findAll()
+        val restaurants = restaurantEntities.map {
+            rest -> rest.toDto()
+        }
+        return restaurants
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.lang.IllegalArgumentException
 
 
 @RestController
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 class HealthCheckController {
 
     @GetMapping
-    @Operation(description = "HealthCheck Endpoint for Restaurant Listing API", tags = arrayOf("Health"),
+    @Operation(description = "HealthCheck Endpoint for Restaurant Listing API", tags = ["Health"],
                 summary = "HealthCheck Endpoint")
     fun getHealthCheck():ResponseEntity<HealthStatus>{
         return ResponseEntity<HealthStatus>(
