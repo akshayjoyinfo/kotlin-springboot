@@ -9,6 +9,10 @@ class RestaurantDto(
     var location: List<Double>,
     var name: String,
     var online: Boolean,
-    var popularity: Double
+    var popularity: Double,
+
+    // do not want to expose this over the http reponse
+    @JsonIgnore
+    var calculated_distance:Double
 ) {
 }

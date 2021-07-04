@@ -5,7 +5,7 @@ import com.wolt.restaurantlisting.dto.response.DiscoveryRestaurantDto
 interface DiscoveryService {
 
     fun findAllNearByRestaurantsByWithInMeters(
-        longitude: Double?,
-        latitude: Double?
+        longitude: Double,
+        latitude: Double
     ): DiscoveryRestaurantDto
 }
