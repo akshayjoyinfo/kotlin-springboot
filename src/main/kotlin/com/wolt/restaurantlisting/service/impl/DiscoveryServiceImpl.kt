@@ -38,6 +38,7 @@ class DiscoveryServiceImpl(
 
         var closerResaurants = nearByRestaurants
             .sortedBy { it.calculated_distance }
+            .sortedByDescending { it.online }
 
         var finalRestaurantSections = DiscoveryRestaurantDto(
             sections = mutableListOf()
