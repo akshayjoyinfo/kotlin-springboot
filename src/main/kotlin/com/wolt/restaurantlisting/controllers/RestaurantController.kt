@@ -28,8 +28,7 @@ class RestaurantController(
     @Operation(description = "Get All Restaurants in the Wolt, used default endpoint here" +
             " https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json ", tags = ["Restaurants"],
         summary = "Get All Restaurants")
-    fun getAllRestaurants(@RequestParam(defaultValue = "https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json") @Valid @NotBlank @NotNull @NotEmpty restaurant_json_url: String=
-        "https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json"
+    fun getAllRestaurants(@RequestParam(defaultValue = "https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json") @Valid @NotBlank @NotNull @NotEmpty restaurant_json_url: String
     ): ResponseEntity<RestaurantList>{
         val restaurants = restaurantService.getAllRestaurants(restaurant_json_url)
 
