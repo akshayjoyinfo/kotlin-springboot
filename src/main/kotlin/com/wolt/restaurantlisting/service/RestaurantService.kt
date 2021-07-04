@@ -5,8 +5,6 @@ import com.wolt.restaurantlisting.dto.response.RestaurantList
 
 interface RestaurantService {
 
-    fun ingestRestaurants(restaurantList: RestaurantList):Boolean
-
-    fun getAllRestaurants(): List<RestaurantDto>
+    fun getAllRestaurants(restaurant_json_url: String): RestaurantList
 
 }

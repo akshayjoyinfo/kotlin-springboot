@@ -8,39 +8,33 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 
 @RestController
+@Validated
 @RequestMapping("/api/v1/restaurants")
 class RestaurantController(
     private val restaurantService: RestaurantService
 ) {
     var logger: Logger = LoggerFactory.getLogger(RestaurantController::class.java)
 
-    @PostMapping
-    @Operation(description = "Ingest Restaurants in Bulk with specified Model", tags = ["Restaurants"],
-        summary = "Bulk Ingest Restaurants")
-    fun ingestRestaurants(@RequestBody restaurantsData:RestaurantList):ResponseEntity<Boolean> {
-
-        restaurantService.ingestRestaurants(
-            restaurantList = restaurantsData
-        )
-
-        return ResponseEntity<Boolean>(
-            true,HttpStatus.OK
-        )
-    }
 
     @GetMapping
-    @Operation(description = "Get All Restaurants in the Wolt", tags = ["Restaurants"],
+    @Operation(description = "Get All Restaurants in the Wolt, used default endpoint here" +
+            " https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json ", tags = ["Restaurants"],
         summary = "Get All Restaurants")
-    fun getAllRestaurants(): ResponseEntity<RestaurantList>{
-        val restaurants = restaurantService.getAllRestaurants()
+    fun getAllRestaurants(@RequestParam(defaultValue = "https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json") @Valid @NotBlank @NotNull @NotEmpty restaurant_json_url: String=
+        "https://raw.githubusercontent.com/woltapp/summer2021-internship/main/restaurants.json"
+    ): ResponseEntity<RestaurantList>{
+        val restaurants = restaurantService.getAllRestaurants(restaurant_json_url)
 
         return ResponseEntity<RestaurantList>(
-            RestaurantList(
-                restaurants
-            ), HttpStatus.OK
+            restaurants, HttpStatus.OK
         )
     }
 }

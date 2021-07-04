@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 import java.util.*
+import javax.validation.ConstraintViolationException
 
 
 @Slf4j(topic = "GLOBAL_EXCEPTION_HANDLER")
@@ -42,6 +43,13 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleAllUncaughtException(exception: Exception, request: WebRequest): ResponseEntity<Any> {
         log.error("Unknown error occurred", exception)
         return buildErrorResponse(exception, "Unknown error occurred", HttpStatus.INTERNAL_SERVER_ERROR, request)
+    }
+
+    @ExceptionHandler(ConstraintViolationException::class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    fun handleAllValidationException(exception: Exception, request: WebRequest): ResponseEntity<Any> {
+        log.warn("Validation error occurred", exception)
+        return buildErrorResponse(exception, exception.message, HttpStatus.BAD_REQUEST, request)
     }
 
     private fun buildErrorResponse(
