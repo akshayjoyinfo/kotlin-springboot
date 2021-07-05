@@ -37,7 +37,8 @@ There are two ways you can access/operate the App using Swagger / Postman
 
 Launch swagger url by launching the below url
 
-    `http://localhost:9000/swagger`
+    http://localhost:9000/swagger
+
 ### Tests
 
     gradlew clean test
@@ -49,4 +50,4 @@ any commits to main can deploy code automatically to heroku
 
 Deployed version of current code
 
-    `https://shielded-woodland-78603.herokuapp.com/swagger`
+    https://shielded-woodland-78603.herokuapp.com/swagger
